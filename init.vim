@@ -6,6 +6,7 @@ set smartindent
 set list listchars=tab:\▸\-
 set cursorline
 set cursorcolumn
+set completeopt=menuone
 set shiftwidth=2
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
