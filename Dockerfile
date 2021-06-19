@@ -1,5 +1,8 @@
 FROM ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
+
+COPY ./sources.list /etc/apt/sources.list
+
 RUN apt-get update
 RUN apt-get install -y build-essential libbz2-dev libdb-dev \
   libreadline-dev libffi-dev libgdbm-dev liblzma-dev \
