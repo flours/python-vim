@@ -1,11 +1,29 @@
 snippet     inti
 options     head
-    ${0}=int(input())
+	${0}=int(input())
 
 snippet     mapi
 options     head
-    ${0}=map(int,input().split())
+	${0}=map(int,input().split())
 
 snippet     listi
 options     head
-    ${0}=list(map(int,input().split()))
+	${0}=list(map(int,input().split()))
+
+
+snippet     graphi
+options     head
+	${1:N},${2:M}=list(map(int,input().split()))
+	${3:G}=[[]for i in range(N)]
+	for i in range(M):
+		a,b=map(lambda x:int(x)-1,input().split())
+		${3:G}[a]+=[b]
+		${3:G}[b]+=[a]
+
+snippet     dirgraphi
+options     head
+	${1:N},${2:M}=list(map(int,input().split()))
+	${3:G}=[[]for i in range(N)]
+	for i in range(M):
+		a,b=map(lambda x:int(x)-1,input().split())
+		${3:G}[a]+=[b]
