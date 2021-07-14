@@ -85,3 +85,4 @@ endif
 
 let s:my_snippet = '~/mysnippet'
 let g:neosnippet#snippets_directory = s:my_snippet
+autocmd InsertLeave * set nopaste
