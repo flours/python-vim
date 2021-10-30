@@ -1,7 +1,6 @@
-FROM ubuntu
+FROM pypy:3.7
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY ./sources.list /etc/apt/sources.list
 
 RUN apt-get update
 RUN apt-get install -y build-essential libbz2-dev libdb-dev \
@@ -11,9 +10,7 @@ RUN apt-get install -y build-essential libbz2-dev libdb-dev \
 RUN apt-get install -y python3-pip
 RUN pip3 install pynvim
 
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:neovim-ppa/stable \
-  && apt-get update \
+RUN  apt-get update \
   && apt-get install -y neovim \
   && apt-get install -y curl
 WORKDIR /root

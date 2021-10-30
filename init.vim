@@ -78,3 +78,6 @@ let s:my_snippet = '~/mysnippet'
 let g:neosnippet#snippets_directory = s:my_snippet
 autocmd InsertLeave * set nopaste
 imap <C-c> <Esc>
+set cursorline
+highlight CursorLine ctermbg=5
+set belloff=all
