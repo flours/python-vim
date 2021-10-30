@@ -17,8 +17,17 @@ RUN add-apt-repository ppa:neovim-ppa/stable \
   && apt-get install -y neovim \
   && apt-get install -y curl
 WORKDIR /root
-RUN curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-RUN sh ./installer.sh ~/.cache/dein
+RUN curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh \
+&& sh ./installer.sh ~/.cache/dein \
+&& rm installer.sh
+RUN  curl -sL install-node.now.sh/lts >install.sh \
+&& chmod +x install.sh \
+&& ./install.sh --yes \
+&& rm install.sh
+
+RUN pip install jedi
+
+COPY plugins /root/.config/nvim/plugins
 COPY init.vim /root/.config/nvim/init.vim
 COPY python.snip /root/mysnippet/python.snip
 CMD ["bash"]

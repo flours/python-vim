@@ -29,37 +29,28 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+let s:plugin = '~/.config/nvim/plugins/config/dein.toml'
+
+
+
 " Required:
 set runtimepath+=/root/.cache/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-call dein#begin('/root/.cache/dein')
-
 " Let dein manage dein
-" Required:
-call dein#add('/root/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-" Add or remove your plugins here like this:
-call dein#add('Shougo/deoplete.nvim')
-if !has('nvim')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
+  " dein.tomlを起動時ロードの設定ファイルとして読み込む
+  call dein#load_toml(s:plugin, {'lazy': 0})
+  call dein#end()
+  call dein#save_state()
 endif
-let g:deoplete#enable_at_startup = 1
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
 
-" Required:
-call dein#end()
-
-" Required:
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
 endif
+" Required:
+filetype plugin indent on
+syntax enable
 
 "End dein Scripts-------------------------
 
@@ -86,3 +77,4 @@ endif
 let s:my_snippet = '~/mysnippet'
 let g:neosnippet#snippets_directory = s:my_snippet
 autocmd InsertLeave * set nopaste
+imap <C-c> <Esc>
