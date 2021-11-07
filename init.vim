@@ -24,6 +24,7 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 
 
+set showtabline=2 
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -37,6 +38,7 @@ let s:plugin = '~/.config/nvim/plugins/config/dein.toml'
 set runtimepath+=/root/.cache/dein/repos/github.com/Shougo/dein.vim
 " Let dein manage dein
 
+
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
   " dein.tomlを起動時ロードの設定ファイルとして読み込む
@@ -48,6 +50,9 @@ endif
 if dein#check_install()
   call dein#install()
 endif
+
+
+
 " Required:
 filetype plugin indent on
 syntax enable
@@ -81,3 +86,4 @@ imap <C-c> <Esc>
 set cursorline
 highlight CursorLine ctermbg=5
 set belloff=all
+set mouse=a
