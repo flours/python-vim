@@ -85,7 +85,7 @@ ac.login = function()
   f:close()
 
   vim.cmd("vs")
-  vim.cmd("term oj login -u "..user_name.." -p "..pass.." https://atcoder.jp")
+  vim.cmd("term oj login -u '"..user_name.."' -p '"..pass.."' https://atcoder.jp")
 end
 
 ac.test_with_lang = function(problem,lang)
