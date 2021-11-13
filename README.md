@@ -8,6 +8,6 @@ dein.vimを使用します。
 :Setpass    # atcoderパスワード設定
 :Login      # atcoderログイン、先にSetuser,Setpassを実行してください
 :Setcontest # Setcontest contest設定(ex: abc226)
-Test a      # a問題をテストします
+:Test a      # a問題をテストします
 :Submit a   # a問題を提出します
 ```
