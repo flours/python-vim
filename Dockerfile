@@ -27,11 +27,12 @@ RUN  curl -sL install-node.now.sh/lts >install.sh \
 && ./install.sh --yes \
 && rm install.sh
 
-RUN python -m pip install jedi
+RUN python -m pip install jedi online-judge-tools
 
 COPY plugins /root/.config/nvim/plugins
 COPY init.vim /root/.config/nvim/init.vim
 COPY python.snip /root/mysnippet/python.snip
+COPY ac /root/ac
 #COPY ac /root/ac
 # vim plugin install
 RUN nvim +"call dein#install()" +qall
