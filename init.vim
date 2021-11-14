@@ -87,3 +87,7 @@ set cursorline
 highlight CursorLine ctermbg=5
 set belloff=all
 set mouse=a
+
+let aa=system("python /root/ASCII-Art-Splash-Screen/ascii.py 2>/dev/null")
+let words = split(aa,"\n")
+let g:startify_custom_header = words

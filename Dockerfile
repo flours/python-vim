@@ -29,6 +29,8 @@ RUN  curl -sL install-node.now.sh/lts >install.sh \
 
 RUN python -m pip install jedi online-judge-tools
 
+RUN git clone https://github.com/DanCRichards/ASCII-Art-Splash-Screen.git 
+
 COPY plugins /root/.config/nvim/plugins
 COPY init.vim /root/.config/nvim/init.vim
 COPY python.snip /root/mysnippet/python.snip

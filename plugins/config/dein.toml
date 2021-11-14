@@ -49,3 +49,6 @@ repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = '~/ac'
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
