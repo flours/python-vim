@@ -83,7 +83,8 @@ ac.login = function()
   f = io.open(_opt.ac_path.."/.ac.pass","r")
   local pass = f:read()
   f:close()
-
+  pass = string.gsub(pass,"%%","\\%%")
+  pass = string.gsub(pass,"#","\\#")
   vim.cmd("vs")
   vim.cmd("term oj login -u '"..user_name.."' -p '"..pass.."' https://atcoder.jp")
 end

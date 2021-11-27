@@ -49,6 +49,27 @@ repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = '~/ac'
+hook_add="""
+nmap <space>l <cmd>Login<cr>
+nmap <space>u <cmd>Setuser<cr>
+nmap <space>p <cmd>Setpass<cr>
+nmap <space>c <cmd>Setcontest<cr>
+nmap <space>ta <cmd>Test a<cr>
+nmap <space>tb <cmd>Test b<cr>
+nmap <space>tc <cmd>Test c<cr>
+nmap <space>td <cmd>Test d<cr>
+nmap <space>te <cmd>Test e<cr>
+nmap <space>tf <cmd>Test f<cr>
+nmap <space>tg <cmd>Test g<cr>
+nmap <space>th <cmd>Test h<cr>
+"""
 
 [[plugins]]
 repo = 'mhinz/vim-startify'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
