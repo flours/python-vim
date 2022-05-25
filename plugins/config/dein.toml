@@ -71,5 +71,18 @@ repo = 'mhinz/vim-startify'
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
-repo = 'jiangmiao/auto-pairs'
+-repo = 'jiangmiao/auto-pairs'
 
+[[plugins]]
+repo = 'ayu-theme/ayu-vim'
+hook_add = """
+set termguicolors
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
+"""
+
+[[plugins]]
+repo = "machakann/vim-highlightedyank"
+hook_add = """
+let g:highlightedyank_highlight_duration = 300
+"""
