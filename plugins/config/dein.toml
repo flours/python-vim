@@ -71,13 +71,13 @@ repo = 'mhinz/vim-startify'
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
--repo = 'jiangmiao/auto-pairs'
+repo = 'jiangmiao/auto-pairs'
 
 [[plugins]]
 repo = 'ayu-theme/ayu-vim'
 hook_add = """
 set termguicolors
-let ayucolor="dark"   " for dark version of theme
+let ayucolor="dark"
 colorscheme ayu
 """
 
