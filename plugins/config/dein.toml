@@ -86,3 +86,12 @@ repo = "machakann/vim-highlightedyank"
 hook_add = """
 let g:highlightedyank_highlight_duration = 300
 """
+
+[[plugins]]
+repo = "nvim-lua/plenary.nvim"
+
+[[plugins]]
+repo = "nvim-telescope/telescope.nvim"
+rev = "0.1.1"
+
+

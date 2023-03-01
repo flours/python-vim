@@ -8,6 +8,7 @@ command! Setcontest call luaeval("require('ac').set_contest()")
 command! -nargs=+ Test call Test(<f-args>)
 command! -nargs=+ Submit call Submit(<f-args>)
 command! Login call luaeval("require('ac').login()")
+command! Alg call luaeval("require('ac').algorithm_picker()")
 
 function! Test(...)
   if a:0==1

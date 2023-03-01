@@ -1,7 +1,10 @@
 local ac = {}
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
+local conf = require("telescope.config").values
 ac.ui = require('ac.ui')
 
--- for default options 
+-- for default options
 
 local _opt = {
    lang_commands={
@@ -105,7 +108,7 @@ ac.test = function(problem)
   local ext = vim.api.nvim_eval("expand('%:e')")
   if _opt.lang_extensions[ext]~=nil then
     ac.test_with_lang(problem,_opt.lang_extensions[ext])
-  else 
+  else
     print("please set language")
   end
 end
@@ -125,12 +128,84 @@ ac.submit = function(problem)
   local ext = vim.api.nvim_eval("expand('%:e')")
   if _opt.lang_extensions[ext]~=nil then
     ac.submit_with_lang(problem,_opt.lang_extensions[ext],true)
-  else 
+  else
     print("please set language")
   end
 end
 
 ac.setup = function(opt)
+end
+
+local readfile = function(filename)
+  io.input(filename)
+  body={}
+  local i=0
+  while true do
+    local text = io.read()
+    if text==nil then break end
+    i=i+1
+    body[i] = text
+  end
+  return body
+end
+
+local listdir = function(directory)
+    local i, t, popen = 0, {}, io.popen
+    local pfile = popen('ls -a "'..directory..'"')
+
+    for filename in pfile:lines() do
+        if filename ~= "." and filename~= ".." then
+          i = i + 1
+          t[i] = filename
+        end
+    end
+    pfile:close()
+    return t
+end
+
+local listdir_with_display = function(directory)
+    local i, t, popen = 0, {}, io.popen
+    local pfile = popen('ls -a "'..directory..'"')
+
+    for filename in pfile:lines() do
+        if filename ~= "." and filename~= ".." then
+          i = i + 1
+          t[i]= {filename,readfile(directory.."/"..filename.."/name.txt")[1]}
+        end
+    end
+    pfile:close()
+    return t
+end
+
+
+ac.algorithm_picker = function()
+  opts = require("telescope.themes").get_dropdown{}
+  local target_dir = "/root/algorithms"
+  local actions = require "telescope.actions"
+  local action_state = require "telescope.actions.state"
+  pickers.new(opts,{
+    prompt_title = "algorithms",
+    finder = finders.new_table {
+      results = listdir_with_display(target_dir),
+      entry_maker= function(entry)
+        return {
+          value = entry,
+          display=entry[2],
+          ordinal=entry[2],
+        }
+      end
+    },
+    sorter=conf.generic_sorter(opts),
+    attach_mappings = function(prompt_bufnr, map)
+      actions.select_default:replace(function()
+        actions.close(prompt_bufnr)
+        local selection = action_state.get_selected_entry()
+        local body = readfile(target_dir.."/"..selection.value[1].."/body.py")
+        vim.api.nvim_put(body, "", false, true)
+      end)
+      return true
+    end,
+  }):find()
 end
 
 return ac
