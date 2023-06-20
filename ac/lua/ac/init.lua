@@ -65,6 +65,21 @@ ac.set_contest = function()
   return ac.ui.create_prompt_window('contest?','require("ac")._set_contest')
 end
 
+local scandir = function(directory)
+  local i, t, popen = 0, {}, io.popen
+  local pfile = popen('ls -a "'..directory..'"')
+  for filename in pfile:lines() do
+      if filename == "." or filename==".." then
+        goto continue
+      end
+      i = i + 1
+      t[i] = filename
+      ::continue::
+  end
+  pfile:close()
+  return t
+end
+
 ac.download_samples = function(problem)
   os.execute("mkdir -p ".._opt.ac_path)
   local f = io.open(_opt.ac_path.."/.ac.contest","r")
@@ -75,6 +90,10 @@ ac.download_samples = function(problem)
   if vim.api.nvim_eval("isdirectory('"..dir_name.."')")==0 then
     os.execute("mkdir -p "..dir_name)
     os.execute("oj d -d "..dir_name.." "..url..">/dev/null 2>&1")
+  end
+  -- remove directory if download 0 sample
+  if #scandir(dir_name)==0 then
+    os.execute("rm -r "..dir_name)
   end
 end
 
