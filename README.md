@@ -1,4 +1,4 @@
-# pypy が使用できるDocerのvim環境
+# pypy が使用できるAtCoder用vim環境 with Docker
 dein.vimを使用します。
 
 # custom command
