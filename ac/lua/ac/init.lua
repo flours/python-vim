@@ -16,10 +16,15 @@ local _opt = {
      py= 'pypy',
      js='javascript'
    },
-   submit_lang_code = {
+   submit_lang_code_old = {
      pypy=4047,        --PyPy (7.3.0)
      python=4006,      --(Python (3.8.2))
      javascript=4030   --(Node.js 12.16.1)
+   },
+   submit_lang_code = {
+     pypy=5078,        --PyPy 3.10-v7.3.12
+     python=5055,      --(CPython 3.11.4)
+     javascript=5009.  --(Node.js 18.16.1)
    },
    ac_path=os.getenv("HOME").."/.ac"
 }
@@ -139,8 +144,22 @@ ac.submit_with_lang  = function(problem,lang)
   f:close()
   local dir_name = _opt.ac_path.."/"..contest_name.."/"..problem
   local url = "https://atcoder.jp/contests/"..contest_name .."/tasks/"..contest_name.."_"..problem
-  vim.cmd("vs")
-  vim.cmd("term oj s -y -l ".._opt.submit_lang_code[lang].." "..url.." "..cur_buf_file)
+  local command = "oj-api get-problem "..url.." --full 2>/dev/null"
+  local pfile = io.popen(command)
+  local data = pfile:read("*a")
+  local language_id = vim.json.decode(data)
+  pfile:close()
+  for _, support_lang in ipairs(language_id["result"]["availableLanguages"]) do
+    if tonumber(support_lang.id) == _opt.submit_lang_code_old[lang] then
+      vim.cmd("vs")
+      vim.cmd("term oj s -y -l ".._opt.submit_lang_code_old[lang].." "..url.." "..cur_buf_file)
+      break
+    elseif tonumber(support_lang.id) == _opt.submit_lang_code[lang] then
+      vim.cmd("vs")
+      vim.cmd("term oj s -y -l ".._opt.submit_lang_code[lang].." "..url.." "..cur_buf_file)
+      break
+    end
+  end
 end
 
 ac.submit = function(problem)
