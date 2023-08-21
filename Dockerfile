@@ -1,4 +1,4 @@
-FROM pypy:3.7
+FROM pypy:3.10
 #ENV DEBIAN_FRONTEND=noninteractive
 
 
@@ -11,7 +11,10 @@ RUN python -m pip install pynvim
 
 RUN  apt-get update \
   && apt-get install -y neovim \
-  && apt-get install -y curl
+  && apt-get install -y curl \
+  && apt-get install -y gfortran libopenblas-dev \
+  && apt-get install -y libgeos-dev
+
 RUN wget https://github.com/neovim/neovim/releases/download/v0.8.0/nvim.appimage \
 && chmod u+x nvim.appimage \
 && ./nvim.appimage --appimage-extract \
@@ -26,6 +29,8 @@ RUN  curl -sL install-node.now.sh/lts >install.sh \
 && rm install.sh
 
 RUN python -m pip install jedi online-judge-tools
+COPY ./requirements.txt /root/requirements.txt
+RUN pypy -m pip install -r /root/requirements.txt
 
 RUN git clone https://github.com/DanCRichards/ASCII-Art-Splash-Screen.git 
 
