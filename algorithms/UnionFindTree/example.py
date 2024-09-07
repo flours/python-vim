@@ -14,3 +14,13 @@ if __name__ == "__main__":
     tree.union(10, 11)
     tree.union(11, 12)
     print(tree.all_group_members())
+
+    tree=UnionFind(10)
+    print(tree.find_left(1))
+    tree.union(1,2)
+    tree.union(3,4)
+    print(tree.find_left(2))
+    print(tree.find_right(1))
+    tree.union(2,3)
+    print(tree.find_left(2))
+    print(tree.find_right(1))
